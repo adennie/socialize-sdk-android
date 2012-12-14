@@ -19,48 +19,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.socialize.networks.twitter;
+package com.socialize.demo.implementations.facebook;
 
-import android.content.Context;
-import android.view.View;
-import com.socialize.listener.SocializeAuthListener;
 
 /**
  * @author Jason Polites
  *
  */
-public class TwitterShareCell extends TwitterCell {
+public class PostPhotoToFanPageActivity extends PostPhotoActivity {
 
-	private TwitterAuthClickListener twitterAuthClickListener;
-
-	public TwitterShareCell(Context context) {
-		super(context);
-	}
-	
 	@Override
-	public void init() {
-		super.init();
-		
-		super.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if(isToggled()) {
-					setToggled(false);
-				}
-				else {
-					twitterAuthClickListener.onClick(v);
-				}
-			}
-		});		
+	protected String getGraphPath() {
+		return "469686219748355/photos";
 	}
 
-	public void setAuthListener(SocializeAuthListener listener) {
-		if(twitterAuthClickListener != null) {
-			twitterAuthClickListener.setListener(listener);
-		}
-	}
-
-	public void setTwitterAuthClickListener(TwitterAuthClickListener twitterAuthClickListener) {
-		this.twitterAuthClickListener = twitterAuthClickListener;
+	@Override
+	protected String[] getPermissions() {
+		return new String[]{"publish_stream", "publish_actions", "photo_upload", "manage_pages"};
 	}
 }

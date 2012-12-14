@@ -386,11 +386,15 @@ public class SharePanelView extends DialogPanelView {
 				
 				if(twOK) {
 					twitterShareCell = twitterShareCellFactory.getBean();
-					twitterShareCell.setPadding(padding, padding, padding, padding);
-					twitterShareCell.setLayoutParams(cellParams);
+					
+					if(twitterShareCell != null) {
+						twitterShareCell.setPadding(padding, padding, padding, padding);
+						twitterShareCell.setLayoutParams(cellParams);
+						twitterShareCell.setBackgroundData(twRadii, twStroke, Color.BLACK);
+					}
 					
 					facebookShareCell.setBackgroundData(fbRadii, fbStroke, Color.BLACK);
-					twitterShareCell.setBackgroundData(twRadii, twStroke, Color.BLACK);
+					
 				}
 			}
 		}
@@ -465,6 +469,11 @@ public class SharePanelView extends DialogPanelView {
 					}
 					
 					final ProgressDialog progress = SafeProgressDialog.show(v.getContext());
+					
+					if(dialog != null) {
+						dialog.dismiss();
+					}
+					
 					ShareUtils.shareViaEmail(getActivity(), entity, new ShareAddListener() {
 						
 						@Override
@@ -489,6 +498,10 @@ public class SharePanelView extends DialogPanelView {
 					
 					if(shareDialogListener != null) {
 						shareDialogListener.onSimpleShare(ShareType.SMS);
+					}
+					
+					if(dialog != null) {
+						dialog.dismiss();
 					}
 					
 					final ProgressDialog progress = SafeProgressDialog.show(v.getContext());
@@ -516,6 +529,10 @@ public class SharePanelView extends DialogPanelView {
 					
 					if(shareDialogListener != null) {
 						shareDialogListener.onSimpleShare(ShareType.GOOGLE_PLUS);
+					}
+					
+					if(dialog != null) {
+						dialog.dismiss();
 					}
 					
 					final ProgressDialog progress = SafeProgressDialog.show(v.getContext());
